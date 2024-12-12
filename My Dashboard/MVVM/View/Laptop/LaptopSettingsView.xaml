@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="My_Dashboard.MVVM.View.Laptop.LaptopSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:My_Dashboard.MVVM.View.Laptop"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1350"
+             Background="DarkRed">
+    <Grid>
+        <TextBlock Text="Laptop"
+       Foreground="White"
+       FontSize="28"
+       HorizontalAlignment="Left"
+       Margin="0,0,0,20"/>
+    </Grid>
+</UserControl>

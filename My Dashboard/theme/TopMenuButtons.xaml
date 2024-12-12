@@ -1,0 +1,110 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Define the Foreground brush as a resource -->
+    <SolidColorBrush x:Key="RadioButtonForegroundBrush" Color="#a5a8b1"/>
+
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+           TargetType="{x:Type RadioButton}"
+           x:Key="ComputerButtonTheme">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource RadioButtonForegroundBrush}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Padding" Value="20,0,20,0"/>
+        <Setter Property="Margin" Value="0,0,0,3"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="MaxHeight" Value="50"/>
+        <Setter Property="Width" Value="Auto"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RadioButton}">
+                    <Border x:Name="rdbtnBorder" CornerRadius="5"
+                            Width="{TemplateBinding Width}"
+                            MaxHeight="{TemplateBinding MaxHeight}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True"
+                            Padding="{TemplateBinding Padding}">
+                        <Border.Background>
+                            <SolidColorBrush x:Name="BorderBackground"
+                                             Color="{TemplateBinding Background}"/>
+                        </Border.Background>
+                        <Grid>
+                            <TextBlock x:Name="ContentTextBlock" Focusable="True"
+                                       HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                       Margin="{TemplateBinding Padding}"
+                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                       Text="{TemplateBinding Content}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontWeight="{TemplateBinding FontWeight}"/>
+                            
+                            <Border x:Name="Indicator"
+                                    Background="#6f7382"
+                                    Margin="0,0,0,8"
+                                    Height="4"
+                                    Width="60"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Bottom"
+                                    Visibility="Collapsed"
+                                    CornerRadius="2"/>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#edeeef"/>
+                            <Setter Property="Background" TargetName="Indicator" Value="#6f7382"/>
+                            <Setter Property="Visibility" TargetName="Indicator" Value="Visible"/>
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Foreground" Value="#edeeef"/>
+                            <Setter Property="Background" TargetName="Indicator" Value="#edeeef"/>
+                            <Setter Property="Visibility" TargetName="Indicator" Value="Visible"/>
+                        </Trigger>
+
+                        <!-- Animate Foreground on MouseEnter -->
+                        <EventTrigger RoutedEvent="Border.MouseEnter"
+                                      SourceName="rdbtnBorder">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="ContentTextBlock"
+                                                    Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                                    From="#a5a8b1"
+                                                    To="#edeeef"
+                                                    Duration="0:0:0.3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <!-- Revert Foreground on MouseLeave if not Checked -->
+                        <EventTrigger RoutedEvent="Border.MouseLeave"
+                                      SourceName="rdbtnBorder">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetName="ContentTextBlock"
+                                                    Storyboard.TargetProperty="(TextBlock.Foreground).(SolidColorBrush.Color)"
+                                                    From="#edeeef"
+                                                    To="#a5a8b1"
+                                                    Duration="0:0:0.3"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+
+                        <!-- Ensure Foreground stays bright when checked and mouse is not over -->
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True"/>
+                                <Condition Property="IsMouseOver" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ContentTextBlock" Property="Foreground" Value="#edeeef"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

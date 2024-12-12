@@ -1,0 +1,65 @@
+﻿<Application x:Class="My_Dashboard.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:My_Dashboard"
+             xmlns:viewmodel="clr-namespace:My_Dashboard.MVVM.ViewModel"
+             xmlns:compviewmodel="clr-namespace:My_Dashboard.MVVM.ViewModel.Computer"
+             xmlns:lapviewmodel="clr-namespace:My_Dashboard.MVVM.ViewModel.Laptop"
+             xmlns:nasviewmodel="clr-namespace:My_Dashboard.MVVM.ViewModel.Nas"
+             xmlns:compview="clr-namespace:My_Dashboard.MVVM.View.Computer"
+             xmlns:lapview="clr-namespace:My_Dashboard.MVVM.View.Laptop"
+             xmlns:nasview="clr-namespace:My_Dashboard.MVVM.View.Nas"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/SideMenuButtons.xaml"/>
+                <ResourceDictionary Source="Theme/TopMenuButtons.xaml"/>
+                <ResourceDictionary Source="Theme/MinimiseButton.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--Computer-->
+            <DataTemplate x:Key="test" DataType="{x:Type compviewmodel:ComputerSideBarViewModel}">
+                <compview:ComputerSideBarVew/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type compviewmodel:ComputerDashboardViewModel}">
+                <compview:ComputerDashboardView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type compviewmodel:ComputerGraphsViewModel}">
+                <compview:ComputerGraphsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type compviewmodel:ComputerSettingsViewModel}">
+                <compview:ComputerSettingsView/>
+            </DataTemplate>
+
+            <!--Laptop-->
+            <DataTemplate DataType="{x:Type lapviewmodel:LaptopSideBarViewModel}">
+                <lapview:LaptopSideBarVew/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type lapviewmodel:LaptopDashboardViewModel}">
+                <lapview:LaptopDashboardView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type lapviewmodel:LaptopGraphsViewModel}">
+                <lapview:LaptopGraphsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type lapviewmodel:LaptopSettingsViewModel}">
+                <lapview:LaptopSettingsView/>
+            </DataTemplate>
+
+            <!--Nas-->
+            <DataTemplate DataType="{x:Type nasviewmodel:NasSideBarViewModel}">
+                <nasview:NasSideBarVew/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type nasviewmodel:NasDashboardViewModel}">
+                <nasview:NasDashboardView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type nasviewmodel:NasGraphsViewModel}">
+                <nasview:NasGraphsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type nasviewmodel:NasSettingsViewModel}">
+                <nasview:NasSettingsView/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

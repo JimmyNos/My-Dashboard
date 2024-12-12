@@ -1,0 +1,118 @@
+﻿<Window x:Class="My_Dashboard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:My_Dashboard.MVVM.ViewModel"
+        xmlns:local="clr-namespace:My_Dashboard"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1350"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent">
+
+    <Window.DataContext>
+        <viewmodel:MainViewModel/>
+    </Window.DataContext>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="0" CornerRadius="15" CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--<RowDefinition Height="10"/>-->
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <!--<Rectangle  Grid.Row="1" Fill="#FF4B5063"/>-->
+        <Rectangle   Fill="#FF4B5063"/>
+
+        <!--Top bar-->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom"
+             Height="40">
+
+            <RadioButton x:Name="RdbtnComputer" 
+                 Content="Computer" 
+                 Height="50"
+                 FontSize="16"
+                 IsChecked="True"
+                 Command="{Binding SwitchToComputerSideBarCommand}"
+                 Click="RdbtnComputer_Click"
+                 Style="{StaticResource ComputerButtonTheme}" />
+            <RadioButton x:Name="RdbtnLaptop" 
+                 Content="Laptop" 
+                 Height="50"
+                 FontSize="16"
+                 Click="RdbtnLaptop_Click"
+                 Command="{Binding SwitchToLaptopSideBarCommand}"
+                 Style="{StaticResource ComputerButtonTheme}" />
+            <RadioButton x:Name="RdbtnNas" 
+                 Content="Nas" 
+                 Height="50"
+                 FontSize="16"
+                 Click="RdbtnNas_Click"
+                 Command="{Binding SwitchToNasSideBarCommand}"
+                 Style="{StaticResource ComputerButtonTheme}" Checked="RdbtnNas_Checked" />
+
+        </StackPanel>
+
+        <!--exit and minimise buttons-->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <Rectangle Name="recDrag"
+               Width="1270"
+               Height="20"
+               VerticalAlignment="Top"
+               Fill="Transparent"
+               MouseDown="RecDrag_MouseDown"/>
+            <Button x:Name="btnMinimise"
+            Content="_"
+            Background="Transparent"
+            Foreground="#edeeef"
+            Style="{StaticResource MinimiseButtonTheme}"
+            Click="BtnMinimise_Click"/>
+            <Button x:Name="btnExit"
+            Content="X"
+            Background="Transparent"
+            Foreground="#edeeef"
+            FontSize="25"
+            Style="{StaticResource ExitButtonTheme}"
+            Click="BtnExit_Click"/>
+        </StackPanel>
+
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Rectangle  Fill="#FF2A2F46"/>
+            <Rectangle Grid.Column="1"  Fill="#FF1F1F37"/>
+            <StackPanel Margin="0,5,0,0" VerticalAlignment="Bottom">
+                <RadioButton Name="BtnDashboard" 
+                     IsChecked="True"
+                     Click="BtnDashboard_Click"
+                     Command="{Binding ShowDashboardViewCommand}"
+                     Style="{StaticResource DashboardButtonTheme}"/>
+                <RadioButton Name="BtnGraphs" 
+                     Click="BtnGraphs_Click"
+                     Command="{Binding ShowGraphsViewCommand}"
+                     Style="{StaticResource graphsButtonTheme}"/>
+                <RadioButton Name="BtnSettings" 
+                     Click="BtnSettings_Click"
+                     Command="{Binding ShowSettingsViewCommand}"
+                     Style="{StaticResource SettingsButtonTheme}"/>
+                <Rectangle Fill="#222638" Height="50"/>
+            </StackPanel>
+            <Border Grid.Column="1">
+                <ContentControl Grid.Column="1"
+                    Margin="0"
+                    Content="{Binding CurrentView}"/>
+
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

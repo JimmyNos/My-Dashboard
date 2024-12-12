@@ -1,0 +1,143 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--MinimiseButton-->
+    <Style BasedOn="{StaticResource {x:Type Button}}"
+ TargetType="{x:Type Button}"
+ x:Key="MinimiseButtonTheme">
+        <Style.Setters>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FFBBBFD8"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MaxHeight" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="MaxWidth" Value="40"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="btnBorder" CornerRadius="0,0,0,5"
+                          Width="{TemplateBinding Width}"
+                          MaxHeight="{TemplateBinding MaxHeight}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          SnapsToDevicePixels="True"
+                          Padding="{TemplateBinding Padding}">
+
+                            <Border.Background>
+                                <SolidColorBrush x:Name="BorderBackground"
+                                                 Color="{TemplateBinding Background}"/>
+                            </Border.Background>
+
+
+                            <Grid>
+                                <Path x:Name="Icon" Data="M0,12.251v464.7c0,6.8,5.5,12.3,12.3,12.3h224c6.8,0,12.3-5.5,12.3-12.3s-5.5-12.3-12.3-12.3H24.5v-440.2h440.2v210.5 c0,6.8,5.5,12.2,12.3,12.2s12.3-5.5,12.3-12.2v-222.7c0-6.8-5.5-12.2-12.3-12.2H12.3C5.5-0.049,0,5.451,0,12.251z"
+                                Fill="{TemplateBinding Foreground}" 
+                                Height="20"
+                                Width="20"
+                                Stretch="Fill"/>
+                                <Path x:Name="Icon2" Data="M476.9,489.151c6.8,0,12.3-5.5,12.3-12.3v-170.3c0-6.8-5.5-12.3-12.3-12.3H306.6c-6.8,0-12.3,5.5-12.3,12.3v170.4 c0,6.8,5.5,12.3,12.3,12.3h170.3V489.151z M318.8,318.751h145.9v145.9H318.8V318.751z"
+                                Fill="{TemplateBinding Foreground}" 
+                                Height="8"
+                                Width="8"
+                                Margin="12,12,0,0"
+                                Stretch="Fill"/>
+                                <Path x:Name="Icon3" Data="M135.9,257.651c0,6.8,5.5,12.3,12.3,12.3h109.5c6.8,0,12.3-5.5,12.3-12.3v-109.5c0-6.8-5.5-12.3-12.3-12.3 s-12.3,5.5-12.3,12.3v79.9l-138.7-138.7c-4.8-4.8-12.5-4.8-17.3,0c-4.8,4.8-4.8,12.5,0,17.3l138.7,138.7h-79.9 C141.4,245.351,135.9,250.851,135.9,257.651z"
+                                Fill="{TemplateBinding Foreground}" 
+                                Height="7"
+                                Width="7"
+                                Margin="0,0,7,7"
+                                Stretch="Fill"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="btnBorder" Property="Background"
+                                  Value="#3f4459"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="btnBorder" Property="Background"
+                                  Value="#3f4459"/>
+                                <Setter TargetName="Icon" Property="Fill" Value="#edeeef"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+
+            </Setter>
+
+        </Style.Setters>
+
+
+    </Style>
+
+    <!--Exit-->
+    <Style BasedOn="{StaticResource {x:Type Button}}"
+ TargetType="{x:Type Button}"
+ x:Key="ExitButtonTheme">
+        <Style.Setters>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#FFBBBFD8"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MaxHeight" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="MaxWidth" Value="40"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="btnBorder" CornerRadius="0"
+                          Width="{TemplateBinding Width}"
+                          MaxHeight="{TemplateBinding MaxHeight}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          SnapsToDevicePixels="True"
+                          Padding="{TemplateBinding Padding}">
+
+                            <Border.Background>
+                                <SolidColorBrush x:Name="BorderBackground"
+                                                 Color="{TemplateBinding Background}"/>
+                            </Border.Background>
+
+                            <Grid>
+                                <TextBlock x:Name="ContentTextBlock" Focusable="True"
+                                   HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                   Margin="{TemplateBinding Padding}"
+                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                   Text="{TemplateBinding Content}"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="{TemplateBinding FontWeight}"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="btnBorder" Property="Background"
+                                  Value="#3f4459"/>
+                            </Trigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="btnBorder" Property="Background"
+                                  Value="red"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+
+            </Setter>
+
+        </Style.Setters>
+
+
+    </Style>
+
+</ResourceDictionary>
