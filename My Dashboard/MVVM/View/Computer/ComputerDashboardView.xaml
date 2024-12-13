@@ -12,12 +12,13 @@
         <viewModel:ComputerDashboardViewModel/>
     </UserControl.DataContext>
     <StackPanel>
-        <TextBlock Text="Computer"
+        <!--<TextBlock Text="Computer"
                    Foreground="White"
                    FontSize="28"
                    HorizontalAlignment="Left"
-                   Margin="0,0,0,20"/>
-        <StackPanel Orientation="Horizontal">
+                   Margin="0,0,0,20"/>-->
+        <StackPanel Orientation="Horizontal"
+                    Margin="0,60,0,0">
 
             <!-- CPU Section -->
             <Border Width="600" Height="300" CornerRadius="10" Margin="30,0,0,0">
@@ -90,19 +91,19 @@
                            HorizontalAlignment="Right"/>
                     <userControls:HardwareLabel Grid.Row="1"
                                                 StatName="Load"
-                                                StatGauge="{Binding RamLoadGauge}"
-                                                StatValue="{Binding RamLoad}"
+                                                StatGauge="{Binding DataContext.RamLoadGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                StatValue="{Binding DataContext.RamLoad, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 StatSymbol="%"/>
                     <userControls:HardwareLabel Grid.Column="1"
                                                 Grid.Row="1"
                                                 StatName="Utilization"
-                                                StatGauge="{Binding RamUtilizationGauge}"
-                                                StatValue="{Binding RamUtilization}"
+                                                StatGauge="{Binding DataContext.RamUtilizationGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                StatValue="{Binding DataContext.RamUtilization, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 StatSymbol="GB"/>
                     <userControls:HardwareLabel Grid.Row="2"
                                                 StatName="Available"
-                                                StatGauge="{Binding RamAvailableGauge}"
-                                                StatValue="{Binding RamAvailable}"
+                                                StatGauge="{Binding DataContext.RamAvailableGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                StatValue="{Binding DataContext.RamAvailable, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 StatSymbol="GB"/>
                 </Grid>
             </Border>
@@ -143,37 +144,37 @@
                                HorizontalAlignment="Right"/>
                         <userControls:HardwareLabel Grid.Row="1"
                                                     StatName="Load"
-                                                    StatGauge="{Binding GpuLoadGauge}"
-                                                    StatValue="{Binding GpuLoad}"
+                                                    StatGauge="{Binding DataContext.GpuLoadGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    StatValue="{Binding DataContext.GpuLoad, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     StatSymbol="%"/>
                         <userControls:HardwareLabel Grid.Column="1"
                                                     Grid.Row="1"
                                                     StatName="Power"
-                                                    StatGauge="{Binding GpuPowerGauge}"
-                                                    StatValue="{Binding GpuPower}"
+                                                    StatGauge="{Binding DataContext.GpuPowerGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    StatValue="{Binding DataContext.GpuPower, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     StatSymbol="W"/>
                         <userControls:HardwareLabel Grid.Column="2"
                                                     Grid.Row="1"
                                                     StatName="Temperature"
-                                                    StatGauge="{Binding GpuTempGauge}"
-                                                    StatValue="{Binding GpuTemp}"
+                                                    StatGauge="{Binding DataContext.GpuTempGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    StatValue="{Binding DataContext.GpuTemp, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     StatSymbol="℃"/>
                         <userControls:HardwareLabel Grid.Row="2"
                                                     StatName=" Hotspot Temperature"
-                                                    StatGauge="{Binding GpuHotSpotTempGauge}"
-                                                    StatValue="{Binding GpuHotSpotTemp}"
+                                                    StatGauge="{Binding DataContext.GpuHotSpotTempGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    StatValue="{Binding DataContext.GpuHotSpotTemp, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     StatSymbol="℃"/>
                         <userControls:HardwareLabel Grid.Row="2" 
                                                     Grid.Column="1"
                                                     StatName="Memory"
-                                                    StatGauge="{Binding GpuMemoryGauge}"
-                                                    StatValue="{Binding GpuMemory}"
+                                                    StatGauge="{Binding DataContext.GpuMemoryGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    StatValue="{Binding DataContext.GpuMemory, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     StatSymbol="MB"/>
                         <userControls:HardwareLabel Grid.Row="2"
                                                     Grid.Column="2"
                                                     StatName="Fan Percentage"
-                                                    StatGauge="{Binding GpuFanGauge}"
-                                                    StatValue="{Binding GpuFan}"
+                                                    StatGauge="{Binding DataContext.GpuFanGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    StatValue="{Binding DataContext.GpuFan, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     StatSymbol="RPM"/>
 
                     </Grid>

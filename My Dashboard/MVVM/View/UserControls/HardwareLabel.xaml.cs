@@ -54,7 +54,7 @@ namespace My_Dashboard.MVVM.View.UserControls
             // Set up the storyboard and animation for the EndAngle property
             animation = new DoubleAnimation
             {
-                Duration = new Duration(TimeSpan.FromSeconds(1)),
+                Duration = new Duration(TimeSpan.FromSeconds(0.7)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 

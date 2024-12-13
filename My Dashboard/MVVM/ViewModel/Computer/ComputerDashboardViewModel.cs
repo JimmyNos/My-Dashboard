@@ -22,8 +22,8 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
         private int cpuTemp;
 
         public int CpuLoadGauge => MapToGauge(CpuLoad);
-        public int CpuPowerGauge => MapToGauge(CpuPower);
-        public int CpuTempGauge => MapToGauge(CpuTemp);
+        public int CpuPowerGauge => MapToPowerGauge(CpuPower);
+        public int CpuTempGauge => MapToTempGauge(CpuTemp);
 
 
         //// Example properties for HardwareLabel bindings
@@ -56,8 +56,8 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
         private int ramAvailable;
 
         public int RamLoadGauge => MapToGauge(RamLoad);
-        public int RamUtilizationGauge => MapToGauge(RamUtilization);
-        public int RamAvailableGauge => MapToGauge(RamAvailable);
+        public int RamUtilizationGauge => MapToMemoryGauge(RamUtilization);
+        public int RamAvailableGauge => MapToMemoryGauge(RamAvailable);
 
 
         [ObservableProperty]
@@ -88,17 +88,18 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
         private int gpuFan;
 
         public int GpuLoadGauge => MapToGauge(GpuLoad);
-        public int GpuPowerGauge => MapToGauge(GpuPower);
-        public int GpuTempGauge => MapToGauge(GpuTemp);
-        public int GpuHotSpotTempGauge => MapToGauge(GpuHotSpotTemp);
-        public int GpuMemoryGauge => MapToGauge(GpuMemory);
-        public int GpuFanGauge => MapToGauge(GpuFan);
+        public int GpuPowerGauge => MapToPowerGauge(GpuPower);
+        public int GpuTempGauge => MapToTempGauge(GpuTemp);
+        public int GpuHotSpotTempGauge => MapToTempGauge(GpuHotSpotTemp);
+        public int GpuMemoryGauge => MapToGpuMemoryGauge(GpuMemory);
+        public int GpuFanGauge => MapToGpuFanGauge(GpuFan);
 
-        private int MapToGauge(int value)
-        {
-            return (int)((value * 2.5) - 150);
-        }
-
+        private static int MapToGauge(int value) => (int)((value * 3) - 150);
+        private static int MapToPowerGauge(int value) => (int)((value * 2.5) - 150);
+        private static int MapToTempGauge(int value) => (int)((value * 3.3) - 150);
+        private static int MapToGpuMemoryGauge(int value) => (int)((value * 37.5) - 150);
+        private static int MapToMemoryGauge(int value) => (int)((value * 6.25) - 150);
+        private static int MapToGpuFanGauge(int value) => (int)((value * 0.3) - 150);
 
         public ComputerDashboardViewModel()
         {
@@ -106,8 +107,8 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
             RamName = "RAM";
             gpuName = "GPU";
             //CpuLoad = 50;
-            //Task.Run(UpdateRandomValuesAsync);
-            //Task.Run(test);
+            Task.Run(UpdateRandomValuesAsync);
+            //Task.Run(Test);
         }
 
         private async Task UpdateRandomValuesAsync()
@@ -115,15 +116,25 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
             Random rand = new();
             while (true)
             {
-                CpuLoad = rand.Next(0, 120);
+                CpuLoad = rand.Next(0, 100);
                 CpuPower = rand.Next(0, 120);
                 CpuTemp = rand.Next(0, 90);
+
                 RamLoad = rand.Next(0, 100);
-                await Task.Delay(3000);
+                RamUtilization = rand.Next(0,48);
+                RamAvailable = rand.Next(0,48);
+
+                GpuLoad = rand.Next(0, 100);
+                GpuPower = rand.Next(0, 120);
+                GpuTemp = rand.Next(0, 90);
+                GpuHotSpotTemp= rand.Next(0, 90);
+                GpuMemory = rand.Next(0, 8);
+                GpuFan = rand.Next(0, 1000);
+                await Task.Delay(1300);
             }
         }
 
-        public async Task test()
+        public async Task Test()
         {
             while (true)
             {
