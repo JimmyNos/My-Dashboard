@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:My_Dashboard.MVVM.View.UserControls" 
              xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+             xmlns:viewModel="clr-namespace:My_Dashboard.MVVM.ViewModel.Computer"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
              mc:Ignorable="d" 
              Background="Transparent"
              d:DesignHeight="120" d:DesignWidth="300">
@@ -14,7 +16,7 @@
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                     <GradientStop Color="#99373259" Offset="0.20"/>
-                    <GradientStop Color="#FF11131f" Offset="1"/>
+                    <GradientStop Color="#001c1a2b" Offset="1"/>
                 </LinearGradientBrush>
 
             </Border.Background>
@@ -47,10 +49,25 @@
                         StrokeStartLineCap="Round"
                         Height="80"
                         Width="80"/>
+                <!--<ed:Arc.Triggers>
+                        <EventTrigger RoutedEvent="ed:Arc.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames
+                                        Storyboard.TargetName="ArcStatGauge"
+                                        Storyboard.TargetProperty="EndAngle"
+                                        Duration="0:0:1">
+                                        <SplineDoubleKeyFrame Value="{Binding StatGauge}" KeyTime="0:0:1" KeySpline="0.25,0.75 0.75,1.0" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ed:Arc.Triggers>
+                </ed:Arc>-->
             </Grid>
             <Grid Width="210">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>

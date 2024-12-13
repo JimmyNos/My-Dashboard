@@ -6,33 +6,54 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
 {
     public partial class ComputerDashboardViewModel : ObservableObject
     {
-        [ObservableProperty] 
-        private string cpuName = "AMD";
+        [ObservableProperty]
+        private string cpuName;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CpuLoadGauge))]
+        private int cpuLoad;
 
         [ObservableProperty] 
-        private int cpuLoad = 80;
+        [NotifyPropertyChangedFor(nameof(CpuPowerGauge))]
+        private int cpuPower;
 
         [ObservableProperty] 
-        private int cpuPower = 100;
+        [NotifyPropertyChangedFor(nameof(CpuTempGauge))]
+        private int cpuTemp;
 
-        [ObservableProperty] 
-        private int cpuTemp = 60;
-
-        public int CpuULoadGauge => MapToGauge(CpuLoad);
+        public int CpuLoadGauge => MapToGauge(CpuLoad);
         public int CpuPowerGauge => MapToGauge(CpuPower);
         public int CpuTempGauge => MapToGauge(CpuTemp);
 
+
+        //// Example properties for HardwareLabel bindings
+        //[ObservableProperty]
+        //private string statName = "Load";
+
+        //[ObservableProperty]
+        //private int statGauge = 50; // or any dynamic value
+
+        //[ObservableProperty]
+        //private int statValue = 20;
+
+        //[ObservableProperty]
+        //private string statSymbol = "%";
+
+
         [ObservableProperty]
-        private string ramName = "RAM";
+        private string ramName;
 
         [ObservableProperty] 
-        private int ramLoad = 60;
+        [NotifyPropertyChangedFor(nameof(RamLoadGauge))]
+        private int ramLoad;
 
         [ObservableProperty] 
-        private int ramUtilization = 32;
+        [NotifyPropertyChangedFor(nameof(RamUtilizationGauge))]
+        private int ramUtilization;
 
         [ObservableProperty] 
-        private int ramAvailable = 16;
+        [NotifyPropertyChangedFor(nameof(RamAvailableGauge))]
+        private int ramAvailable;
 
         public int RamLoadGauge => MapToGauge(RamLoad);
         public int RamUtilizationGauge => MapToGauge(RamUtilization);
@@ -40,25 +61,31 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
 
 
         [ObservableProperty]
-        private string gpuName = "GPU";
+        private string gpuName;
 
         [ObservableProperty] 
-        private int gpuLoad = 50;
+        [NotifyPropertyChangedFor(nameof(GpuLoadGauge))]
+        private int gpuLoad;
 
         [ObservableProperty] 
-        private int gpuPower = 150;
+        [NotifyPropertyChangedFor(nameof(GpuPowerGauge))]
+        private int gpuPower;
 
         [ObservableProperty] 
-        private int gpuTemp = 70;
-        
+        [NotifyPropertyChangedFor(nameof(GpuTempGauge))]
+        private int gpuTemp;
+
         [ObservableProperty] 
-        private int gpuHotSpotTemp = 70;
+        [NotifyPropertyChangedFor(nameof(GpuHotSpotTempGauge))]
+        private int gpuHotSpotTemp;
 
         [ObservableProperty]
-        private int gpuMemory = 70;
+        [NotifyPropertyChangedFor(nameof(GpuMemoryGauge))]
+        private int gpuMemory;
 
         [ObservableProperty]
-        private int gpuFan = 70;
+        [NotifyPropertyChangedFor(nameof(GpuFanGauge))]
+        private int gpuFan;
 
         public int GpuLoadGauge => MapToGauge(GpuLoad);
         public int GpuPowerGauge => MapToGauge(GpuPower);
@@ -67,11 +94,20 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
         public int GpuMemoryGauge => MapToGauge(GpuMemory);
         public int GpuFanGauge => MapToGauge(GpuFan);
 
-        private int MapToGauge(int value) => (int)((value * 100) / 100); // Adjust to scale
+        private int MapToGauge(int value)
+        {
+            return (int)((value * 2.5) - 150);
+        }
+
 
         public ComputerDashboardViewModel()
         {
-            Task.Run(UpdateRandomValuesAsync);
+            CpuName = "AMD";
+            RamName = "RAM";
+            gpuName = "GPU";
+            //CpuLoad = 50;
+            //Task.Run(UpdateRandomValuesAsync);
+            //Task.Run(test);
         }
 
         private async Task UpdateRandomValuesAsync()
@@ -79,10 +115,20 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
             Random rand = new();
             while (true)
             {
-                CpuLoad = rand.Next(0, 101);
-                CpuPower = rand.Next(50, 150);
-                CpuTemp = rand.Next(40, 90);
+                CpuLoad = rand.Next(0, 120);
+                CpuPower = rand.Next(0, 120);
+                CpuTemp = rand.Next(0, 90);
+                RamLoad = rand.Next(0, 100);
                 await Task.Delay(3000);
+            }
+        }
+
+        public async Task test()
+        {
+            while (true)
+            {
+                await Task.Delay(5000);
+                CpuName += "1";
             }
         }
     }

@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:My_Dashboard.MVVM.View.Computer"
-             xmlns:userControls="clr-namespace:My_Dashboard.MVVM.View.UserControls" 
+             xmlns:userControls="clr-namespace:My_Dashboard.MVVM.View.UserControls"
+             xmlns:viewModel="clr-namespace:My_Dashboard.MVVM.ViewModel.Computer"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1350">
+    <UserControl.DataContext>
+        <viewModel:ComputerDashboardViewModel/>
+    </UserControl.DataContext>
     <StackPanel>
         <TextBlock Text="Computer"
                    Foreground="White"
@@ -42,19 +46,19 @@
                            HorizontalAlignment="Right"/>
                     <userControls:HardwareLabel Grid.Row="1"
                                                 StatName="Load"
-                                                StatGauge="{Binding CpuULoadGauge}"
-                                                StatValue="{Binding CpuLoad}"
+                                                StatGauge="{Binding DataContext.CpuLoadGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                StatValue="{Binding DataContext.CpuLoad, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 StatSymbol="%"/>
                     <userControls:HardwareLabel Grid.Column="1"
                                                 Grid.Row="1"
                                                 StatName="Power"
-                                                StatGauge="{Binding CpuPowerGauge}"
-                                                StatValue="{Binding CpuPower}"
+                                                StatGauge="{Binding DataContext.CpuPowerGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                StatValue="{Binding DataContext.CpuPower, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 StatSymbol="W"/>
                     <userControls:HardwareLabel Grid.Row="2"
                                                 StatName="Temperature"
-                                                StatGauge="{Binding CpuTempGauge}"
-                                                StatValue="{Binding CpuTemp}"
+                                                StatGauge="{Binding DataContext.CpuTempGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                StatValue="{Binding DataContext.CpuTemp, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                 StatSymbol="℃"/>
                 </Grid>
             </Border>
