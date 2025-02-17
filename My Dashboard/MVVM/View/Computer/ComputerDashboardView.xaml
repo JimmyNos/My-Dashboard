@@ -167,15 +167,17 @@
                         <userControls:HardwareLabel Grid.Row="2" 
                                                     Grid.Column="1"
                                                     StatName="Memory"
+                                                    StatValueTop="{Binding DataContext.GpuMemoryTotal, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     StatGauge="{Binding DataContext.GpuMemoryGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     StatValue="{Binding DataContext.GpuMemory, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    StatSymbol="MB"/>
+                                                    StatSymbol="%"/>
                         <userControls:HardwareLabel Grid.Row="2"
                                                     Grid.Column="2"
                                                     StatName="Fan Percentage"
+                                                    StatValueTop="{Binding DataContext.GpuFanSpeed, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     StatGauge="{Binding DataContext.GpuFanGauge, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     StatValue="{Binding DataContext.GpuFan, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                    StatSymbol="RPM"/>
+                                                    StatSymbol="%"/>
 
                     </Grid>
                 </Grid>

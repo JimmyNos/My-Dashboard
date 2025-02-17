@@ -34,7 +34,15 @@ namespace My_Dashboard.MVVM.View.UserControls
             set => SetValue(StatValueProperty, value);
         }
         public static readonly DependencyProperty StatValueProperty =
-            DependencyProperty.Register(nameof(StatValue), typeof(int), typeof(HardwareLabel), new PropertyMetadata(24));
+            DependencyProperty.Register(nameof(StatValue), typeof(int), typeof(HardwareLabel), new PropertyMetadata(100));
+        
+        public string StatValueTop
+        {
+            get => (string)GetValue(StatValueTopProperty);
+            set => SetValue(StatValueTopProperty, value);
+        }
+        public static readonly DependencyProperty StatValueTopProperty =
+            DependencyProperty.Register(nameof(StatValueTop), typeof(string), typeof(HardwareLabel), new PropertyMetadata(""));
 
         public string StatSymbol
         {

@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using My_Dashboard.Hardware_monitor;
 using System;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace My_Dashboard.MVVM.ViewModel.Computer
 {
@@ -25,21 +27,6 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
         public int CpuPowerGauge => MapToPowerGauge(CpuPower);
         public int CpuTempGauge => MapToTempGauge(CpuTemp);
 
-
-        //// Example properties for HardwareLabel bindings
-        //[ObservableProperty]
-        //private string statName = "Load";
-
-        //[ObservableProperty]
-        //private int statGauge = 50; // or any dynamic value
-
-        //[ObservableProperty]
-        //private int statValue = 20;
-
-        //[ObservableProperty]
-        //private string statSymbol = "%";
-
-
         [ObservableProperty]
         private string ramName;
 
@@ -59,9 +46,8 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
         public int RamUtilizationGauge => MapToMemoryGauge(RamUtilization);
         public int RamAvailableGauge => MapToMemoryGauge(RamAvailable);
 
-
         [ObservableProperty]
-        private string gpuName;
+        private string? gpuName;
 
         [ObservableProperty] 
         [NotifyPropertyChangedFor(nameof(GpuLoadGauge))]
@@ -84,8 +70,14 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
         private int gpuMemory;
 
         [ObservableProperty]
+        private string gpuMemoryTotal;
+
+        [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(GpuFanGauge))]
         private int gpuFan;
+
+        [ObservableProperty]
+        private string gpuFanSpeed;
 
         public int GpuLoadGauge => MapToGauge(GpuLoad);
         public int GpuPowerGauge => MapToPowerGauge(GpuPower);
@@ -94,20 +86,71 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
         public int GpuMemoryGauge => MapToGpuMemoryGauge(GpuMemory);
         public int GpuFanGauge => MapToGpuFanGauge(GpuFan);
 
-        private static int MapToGauge(int value) => (int)((value * 3) - 150);
-        private static int MapToPowerGauge(int value) => (int)((value * 2.5) - 150);
-        private static int MapToTempGauge(int value) => (int)((value * 3.3) - 150);
-        private static int MapToGpuMemoryGauge(int value) => (int)((value * 37.5) - 150);
-        private static int MapToMemoryGauge(int value) => (int)((value * 6.25) - 150);
-        private static int MapToGpuFanGauge(int value) => (int)((value * 0.3) - 150);
+        private static int MapToGauge(int? value = 0)
+        {
+            if (value is null)
+            {
+                return 0;
+            }
+
+            return (int)(value * 3 - 150);
+        }
+
+        private static int MapToPowerGauge(int? value)
+        {
+            if (value is null)
+            {
+                return 0;
+            }
+            return (int)((value * 2.5) - 150);
+        }
+
+        private static int MapToTempGauge(int? value)
+        {
+            if (value is null)
+            {
+                return 0;
+            }
+            return (int)((value * 3.3) - 150);
+        }
+
+        private static int MapToGpuMemoryGauge(int? value)
+        {
+            if (value is null)
+            {
+                return 0;
+            }
+            return (int)((value * 3) - 150);
+        }
+
+        private static int MapToMemoryGauge(int? value)
+        {
+            if (value is null)
+            {
+                return 0;
+            }
+            return (int)((value * 6.25) - 150);
+        }
+
+        private static int MapToGpuFanGauge(int? value)
+        {
+            if (value is null)
+            {
+                return 0;
+            }
+            return (int)((value * 3) - 150);
+        }
+
+        public HardwareMonitor? hardwareMonitor = new();
 
         public ComputerDashboardViewModel()
         {
-            CpuName = "AMD";
-            RamName = "RAM";
-            gpuName = "GPU";
+            
+            Task.Run(Monitor);
+            //CpuLoad = Convert.ToInt32(hardwareMonitor.cpuLoad);
+
+            
             //CpuLoad = 50;
-            Task.Run(UpdateRandomValuesAsync);
             //Task.Run(Test);
         }
 
@@ -141,6 +184,51 @@ namespace My_Dashboard.MVVM.ViewModel.Computer
                 await Task.Delay(5000);
                 CpuName += "1";
             }
+        }
+
+        public async Task Monitor()
+        {
+            while (true) 
+            {
+                try
+                {
+                    hardwareMonitor.computer.Open();
+                    hardwareMonitor.Monitor();
+
+                    CpuName = hardwareMonitor.cpuName;
+                    RamName = Convert.ToInt32(hardwareMonitor.ramAvailable + hardwareMonitor.ramUsed).ToString() + "GB";
+                    gpuName = hardwareMonitor.gpuName;
+                    //MessageBox.Show(hardwareMonitor.cpuLoad);
+                    CpuLoad = Convert.ToInt32(hardwareMonitor.cpuLoad);
+                    CpuPower = Convert.ToInt32(hardwareMonitor.cpuPower);
+                    CpuTemp = Convert.ToInt32(hardwareMonitor.cpuTemperature);
+
+                    RamLoad = Convert.ToInt32(hardwareMonitor.ramLoad);
+                    RamUtilization = Convert.ToInt32(hardwareMonitor.ramUsed);
+                    RamAvailable = Convert.ToInt32(hardwareMonitor.ramAvailable);
+
+                    GpuLoad = Convert.ToInt32(hardwareMonitor.gpuLoad);
+                    GpuPower = Convert.ToInt32(hardwareMonitor.gpuPower);
+                    GpuTemp = Convert.ToInt32(hardwareMonitor.gpuTemperature);
+                    GpuHotSpotTemp = Convert.ToInt32(hardwareMonitor.gpuHotspotTemp);
+                    GpuMemory = (int)(hardwareMonitor.gpuMemoryUsed / hardwareMonitor.gpuMemoryTotal * 100);
+                    GpuMemoryTotal = $"{(int)(hardwareMonitor.gpuMemoryUsed / 1000)} / {(int)(hardwareMonitor.gpuMemoryTotal / 1000)} GB";
+                    GpuFan = Convert.ToInt32(hardwareMonitor.gpuFanPer);
+                    GpuFanSpeed = hardwareMonitor.gpuFanSpeed + " RPM";
+
+                    //hardwareMonitor.ResetHardware("");
+
+                    await Task.Delay(2000);
+                    //MessageBox.Show("ran");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                    break;
+                }
+                
+            }
+            
         }
     }
 }

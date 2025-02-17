@@ -17,9 +17,9 @@
         <viewmodel:MainViewModel/>
     </Window.DataContext>
 
-    <WindowChrome.WindowChrome>
+    <!--<WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="0" CornerRadius="15" CaptionHeight="0"/>
-    </WindowChrome.WindowChrome>
+    </WindowChrome.WindowChrome>-->
     
     <Grid>
         <Grid.RowDefinitions>

@@ -83,6 +83,13 @@
                        VerticalAlignment="Bottom"
                        HorizontalAlignment="Right"
                        FontSize="25"/>
+                <Label Content="{Binding StatValueTop}"
+                       x:Name="LblStatValueTop"
+                       Grid.ColumnSpan="3"
+                       VerticalAlignment="Top"
+                       Foreground="#3c446e"
+                       HorizontalAlignment="Right"
+                       FontSize="20"/>
 
             </Grid>
 
